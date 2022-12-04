@@ -18,15 +18,15 @@ const sortDoubles = () => {
 
     if (
       (firstNr >= thirdNr && firstNr <= fourthNr) ||
-      (secondNr >= thirdNr && secondNr <= fourthNr)
+      (secondNr >= thirdNr && secondNr <= fourthNr) ||
+      (thirdNr >= firstNr && thirdNr <= secondNr) ||
+      (fourthNr >= firstNr && fourthNr <= secondNr)
     ) {
       count++;
-      console.log("line", i + 1, double);
-      console.log(count);
     } else null;
   });
   return;
 };
 
 sortDoubles();
-// console.log(count);
+console.log(count);
