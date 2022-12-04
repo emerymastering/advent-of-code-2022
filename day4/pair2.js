@@ -1,4 +1,5 @@
 import fs from "fs";
+import { threadId } from "worker_threads";
 const input = fs.readFileSync("./input.txt", "utf8").split("\n");
 
 let count = 0;
@@ -6,16 +7,18 @@ let count = 0;
 const sortDoubles = () => {
   input.map((double, i) => {
     const doubleArr = double.split(",");
+    let firstNr = parseInt(doubleArr[0].slice(0, 2));
+    let secondNr = parseInt(
+      doubleArr[0].substring(doubleArr[0].indexOf("-") + 1)
+    );
+    let thirdNr = parseInt(doubleArr[1].slice(0, 2));
+    let fourthNr = parseInt(
+      doubleArr[1].substring(doubleArr[1].indexOf("-") + 1)
+    );
 
     if (
-      (parseInt(doubleArr[1].substring(doubleArr[1].indexOf("-") + 1)) >=
-        parseInt(doubleArr[0].slice(0, 2)) &&
-        parseInt(doubleArr[0].slice(0, 2)) >=
-          parseInt(doubleArr[1].slice(0, 2))) ||
-      (parseInt(doubleArr[1].substring(doubleArr[1].indexOf("-") + 1)) >=
-        parseInt(doubleArr[0].substring(doubleArr[0].indexOf("-") + 1)) &&
-        parseInt(doubleArr[0].substring(doubleArr[0].indexOf("-") + 1)) >=
-          parseInt(doubleArr[1].slice(0, 2)))
+      (firstNr >= thirdNr && firstNr <= fourthNr) ||
+      (secondNr >= thirdNr && secondNr <= fourthNr)
     ) {
       count++;
       console.log("line", i + 1, double);
